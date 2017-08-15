@@ -7,5 +7,17 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{class: "#{controller.controller_name}"}
-    = yield
-  
+    #banner
+
+      %span.title= @page_title
+    #columns
+      #side
+        #cart{style: @cart.line_items.empty? ? 'display: none;' : ''}
+          = render @cart if @cart
+        %ul
+          %li= link_to 'Home', store_index_path
+          %li= link_to 'Questions', '/faq'
+          %li= link_to 'News', '/news'
+          %li= link_to 'Contact', '/contact'
+      #main
+        = yield
