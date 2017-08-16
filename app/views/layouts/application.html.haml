@@ -2,13 +2,12 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Depot
+    %title PragProg Books Online Store
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{class: "#{controller.controller_name}"}
     #banner
-
       %span.title= @page_title
     #columns
       #side
@@ -19,5 +18,13 @@
           %li= link_to 'Questions', '/faq'
           %li= link_to 'News', '/news'
           %li= link_to 'Contact', '/contact'
+
+        - if session[:user_id]
+          %ul
+            %li= link_to 'Orders', orders_path
+            %li= link_to 'Products', products_path
+            %li= link_to 'Users', users_path
+
+          = button_to 'Logout', logout_path, method: :delete
       #main
         = yield
